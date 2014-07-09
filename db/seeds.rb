@@ -27,19 +27,10 @@ trapeze_show = Act.create(:name => "Trapeze Show", :date => (4).days.from_now)
 juggle_rap_battle = Act.create(:name => "Juggle/Rap Battle", :date => (1).week.from_now)
 freak_show = Act.create(:name => "Freak Show", :date => (12).days.from_now)
 
-cj.talent = clown
-cj_jr.talent = clown
-cjina.talent = clown
-cj_iii.talent = clown
-cj_jr_jr.talent = clown
-
-zach.talent = acrobat
-
-catherine.talent = juggler
-katerina.talent = juggler
-kathy.talent = juggler
-
-will.talent = freak
+clown.amoebas << [cj, cj_jr, cjina, cj_iii, cj_jr_jr]
+acrobat.amoebas << zach
+juggler.amoebas << [catherine, katerina, kathy]
+freak.amoebas << will
 
 child_scaring_contest_balancing_act.amoebas << [cj, cj_jr, cjina, cj_iii, cj_jr_jr, zach]
 trapeze_show.amoebas << zach

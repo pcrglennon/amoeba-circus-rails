@@ -10,5 +10,14 @@
   <%= @act.date %>
 </p>
 
+<p>
+  <strong>Amoebas:</strong>
+  <ul style="list-style-type:none;">
+    <% @act.amoebas.each do |amoeba| %>
+      <li><%= amoeba.name %>:<%= amoeba.talent.name %></li>
+    <% end %>
+  </ul>
+</p>
+
 <%= link_to 'Edit', edit_act_path(@act) %> |
 <%= link_to 'Back', acts_path %>

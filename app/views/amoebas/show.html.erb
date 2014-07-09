@@ -10,5 +10,10 @@
   <%= @amoeba.generation %>
 </p>
 
+<p>
+  <strong>Talent:</strong>
+  <%= @amoeba.talent ? @amoeba.talent.name : "None :(" %>
+</p>
+
 <%= link_to 'Edit', edit_amoeba_path(@amoeba) %> |
 <%= link_to 'Back', amoebas_path %>
