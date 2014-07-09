@@ -15,5 +15,9 @@
   <%= @amoeba.talent ? @amoeba.talent.name : "None :(" %>
 </p>
 
+<%= form_tag split_amoeba_path(@amoeba) do %>
+  <%= submit_tag 'Split' %>
+<% end %>
+
 <%= link_to 'Edit', edit_amoeba_path(@amoeba) %> |
 <%= link_to 'Back', amoebas_path %>

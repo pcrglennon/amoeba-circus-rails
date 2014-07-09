@@ -1,5 +1,5 @@
 class AmoebasController < ApplicationController
-  before_action :set_amoeba, only: [:show, :edit, :update, :destroy]
+  before_action :set_amoeba, only: [:show, :edit, :update, :destroy, :split]
 
   # GET /amoebas
   # GET /amoebas.json
@@ -59,6 +59,11 @@ class AmoebasController < ApplicationController
       format.html { redirect_to amoebas_url }
       format.json { head :no_content }
     end
+  end
+
+  def split
+    @amoeba.split
+    redirect_to amoebas_path
   end
 
   private
