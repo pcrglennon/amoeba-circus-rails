@@ -24,11 +24,8 @@ RSpec.describe AmoebasController, :type => :controller do
   # Amoeba. As you add validations to Amoeba, be sure to
   # adjust the attributes here as well.
   let(:valid_attributes) {
-    skip("Add a hash of attributes valid for your model")
-  }
-
-  let(:invalid_attributes) {
-    skip("Add a hash of attributes invalid for your model")
+    juggling = Talent.create(:name => "Juggling")
+    {:name => "Bob", :generation => 1, :talent => juggling}
   }
 
   # This should return the minimal set of values that should be in the session
@@ -87,30 +84,19 @@ RSpec.describe AmoebasController, :type => :controller do
       end
     end
 
-    describe "with invalid params" do
-      it "assigns a newly created but unsaved amoeba as @amoeba" do
-        post :create, {:amoeba => invalid_attributes}, valid_session
-        expect(assigns(:amoeba)).to be_a_new(Amoeba)
-      end
-
-      it "re-renders the 'new' template" do
-        post :create, {:amoeba => invalid_attributes}, valid_session
-        expect(response).to render_template("new")
-      end
-    end
   end
 
   describe "PUT update" do
     describe "with valid params" do
       let(:new_attributes) {
-        skip("Add a hash of attributes valid for your model")
+        acrobat = Talent.create(:name => "Acrobat")
+        {:name => "Bobby", :talent => acrobat}
       }
 
       it "updates the requested amoeba" do
         amoeba = Amoeba.create! valid_attributes
         put :update, {:id => amoeba.to_param, :amoeba => new_attributes}, valid_session
         amoeba.reload
-        skip("Add assertions for updated state")
       end
 
       it "assigns the requested amoeba as @amoeba" do
@@ -126,19 +112,6 @@ RSpec.describe AmoebasController, :type => :controller do
       end
     end
 
-    describe "with invalid params" do
-      it "assigns the amoeba as @amoeba" do
-        amoeba = Amoeba.create! valid_attributes
-        put :update, {:id => amoeba.to_param, :amoeba => invalid_attributes}, valid_session
-        expect(assigns(:amoeba)).to eq(amoeba)
-      end
-
-      it "re-renders the 'edit' template" do
-        amoeba = Amoeba.create! valid_attributes
-        put :update, {:id => amoeba.to_param, :amoeba => invalid_attributes}, valid_session
-        expect(response).to render_template("edit")
-      end
-    end
   end
 
   describe "DELETE destroy" do

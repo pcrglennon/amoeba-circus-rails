@@ -69,6 +69,6 @@ class ActsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def act_params
-      params.require(:act).permit(:name, :date)
+      params.require(:act).permit(:name, :date, :amoeba_ids => [])
     end
 end

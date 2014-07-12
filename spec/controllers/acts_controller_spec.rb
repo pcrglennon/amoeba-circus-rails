@@ -11,7 +11,7 @@ require 'rails_helper'
 # It only uses APIs available in rails and/or rspec-rails.  There are a number
 # of tools you can use to make these specs even more expressive, but we're
 # sticking to rails and rspec-rails APIs to keep things simple and stable.
-#
+
 # Compared to earlier versions of this generator, there is very limited use of
 # stubs and message expectations in this spec.  Stubs are only used when there
 # is no simpler way to get a handle on the object needed for the example.
@@ -24,11 +24,10 @@ RSpec.describe ActsController, :type => :controller do
   # Act. As you add validations to Act, be sure to
   # adjust the attributes here as well.
   let(:valid_attributes) {
-    skip("Add a hash of attributes valid for your model")
-  }
-
-  let(:invalid_attributes) {
-    skip("Add a hash of attributes invalid for your model")
+    juggling = Talent.create(:name => "Juggling")
+    bob = Amoeba.create(:name => "Bob", :talent => juggling)
+    joe = Amoeba.create(:name => "Joe", :talent => juggling)
+    {:name => "Juggling Show", :date => Time.now, :amoebas => [bob, joe]}
   }
 
   # This should return the minimal set of values that should be in the session
@@ -87,30 +86,24 @@ RSpec.describe ActsController, :type => :controller do
       end
     end
 
-    describe "with invalid params" do
-      it "assigns a newly created but unsaved act as @act" do
-        post :create, {:act => invalid_attributes}, valid_session
-        expect(assigns(:act)).to be_a_new(Act)
-      end
-
-      it "re-renders the 'new' template" do
-        post :create, {:act => invalid_attributes}, valid_session
-        expect(response).to render_template("new")
-      end
-    end
   end
 
   describe "PUT update" do
     describe "with valid params" do
       let(:new_attributes) {
-        skip("Add a hash of attributes valid for your model")
+        juggling = Talent.create(:name => "Juggling")
+        steve = Amoeba.create(:name => "Steve", :talent => juggling)
+        {:name => "Juggling Show w/ Steve", :amoeba_ids => [steve.id]}
       }
 
       it "updates the requested act" do
         act = Act.create! valid_attributes
         put :update, {:id => act.to_param, :act => new_attributes}, valid_session
         act.reload
-        skip("Add assertions for updated state")
+        expect(act.name).to eq("Juggling Show w/ Steve")
+        puts act.amoebas.inspect
+        expect(act.amoebas.count).to eq(1)
+        expect(act.amoebas.first.name).to eq("Steve")
       end
 
       it "assigns the requested act as @act" do
@@ -126,19 +119,6 @@ RSpec.describe ActsController, :type => :controller do
       end
     end
 
-    describe "with invalid params" do
-      it "assigns the act as @act" do
-        act = Act.create! valid_attributes
-        put :update, {:id => act.to_param, :act => invalid_attributes}, valid_session
-        expect(assigns(:act)).to eq(act)
-      end
-
-      it "re-renders the 'edit' template" do
-        act = Act.create! valid_attributes
-        put :update, {:id => act.to_param, :act => invalid_attributes}, valid_session
-        expect(response).to render_template("edit")
-      end
-    end
   end
 
   describe "DELETE destroy" do

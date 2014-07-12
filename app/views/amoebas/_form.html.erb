@@ -17,6 +17,11 @@
   </div>
 
   <div class="field">
+    <%= f.label :generation %><br>
+    <%= f.number_field :generation %>
+  </div>
+
+  <div class="field">
     <%= f.label :talent %><br>
     <%= f.select :talent_id, options_from_collection_for_select(Talent.all, :id, :name, @amoeba.talent_id) %>
   </div>
